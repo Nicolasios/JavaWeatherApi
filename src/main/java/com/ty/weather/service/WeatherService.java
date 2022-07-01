@@ -9,7 +9,9 @@ import com.ty.weather.entity.Result;
 import com.ty.weather.entity.WeatherEntity;
 import com.ty.weather.service.request.HttpClientService;
 import com.ty.weather.url.DailyUrl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
@@ -17,7 +19,7 @@ import java.security.SignatureException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 @Service
 public class WeatherService {
 
@@ -29,6 +31,10 @@ public class WeatherService {
         String url = demo.generateGetDiaryWeatherURL(location, "zh-Hans",
                 "c", "1", "1");
         String weather = httpClientService.doGet(url);
+        log.info("weather:{}",weather);
+        if(StringUtils.isEmpty(weather)){
+            return null;
+        }
         Content content = JSON.parseObject(weather, Content.class);
         List<WeatherEntity> weatherEntities = toWeatherEntity(content);
         return weatherEntities;

@@ -52,6 +52,12 @@ public class PageResult<T> extends RestResult<List<T>> {
         result.setMessage(message);
         return result;
     }
+    public static <E> PageResult<E> error(int code, String message) {
+        PageResult<E> result = new PageResult();
+        result.setCode(code);
+        result.setMessage(message);
+        return result;
+    }
 
     public Integer getCurrent() {
         return this.current;

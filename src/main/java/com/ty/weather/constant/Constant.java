@@ -4,6 +4,8 @@ public class Constant {
 
     public static final int OK = 200;
 
+    public static final int ERROR = 500;
+
     public static final String TIANQI_DAILY_WEATHER_URL = "https://api.seniverse.com/v3/weather/daily.json";
 
     public static final String TIANQI_API_SECRET_KEY = "SwJO0Obiab5VHf9ah"; //

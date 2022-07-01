@@ -28,6 +28,9 @@ public class WeatherController {
     @GetMapping("/getAndSaveWeather")
     public RestResult<List<WeatherEntity>> getWeather(@Param("location") String location){
         List<WeatherEntity> weather = weatherService.getWeather(location);
+        if(weather==null){
+            return PageResult.error(Constant.ERROR,"未查询到数据");
+        }
         List<WeatherEntity> weatherEntities = weatherRepository.saveAll(weather);
         return PageResult.ok(Constant.OK,"查询成功",weatherEntities);
     }
